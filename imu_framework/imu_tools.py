@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 
 class imu_tools():
-
     def __init__(self, fifoMemSize=10000):
 
         self.fifoMemSize = fifoMemSize
@@ -18,15 +17,15 @@ class imu_tools():
             self.fifoMemory[self.fifoMemIteration] = inputData
         if self.fifoMemIteration >= self.fifoMemSize:
             while i <= (self.fifoMemSize - 2):
-                self.fifoMemory[i] = self.fifoMemory[i+1]
-                i+=1
-            self.fifoMemory[self.fifoMemSize-1] = inputData
+                self.fifoMemory[i] = self.fifoMemory[i + 1]
+                i += 1
+            self.fifoMemory[self.fifoMemSize - 1] = inputData
         self.fifoMemIteration += 1
 
     def get_fifoMemory(self):
         return self.fifoMemory
 
-    def highPassFilter(self, filterSize = 150000):
+    def highPassFilter(self, filterSize=150000):
         W = np.fft.fftfreq(self.fifoMemSize, 0.0000025)
         f_signal = np.fft.fft(self.fifoMemory)
         cut_f_signal = f_signal.copy()
@@ -42,20 +41,9 @@ class imu_tools():
         cut_signal = np.fft.ifft(cut_f_signal)
         return cut_signal
 
-
-    def print2CvFile(self, dof, data, fileName, testRawFiltered, iteration,
-                     save_path='C:/Users/bob/Desktop/imu_framework/imu_framework/data/test'):
-
-        #save_path = ''
-        if testRawFiltered == 'test':
-            save_path = '/home/pi/Desktop/imu_framework/imu_framework/data/test'
-            fileName = fileName + '_test_data'
-        if testRawFiltered == 'raw':
-            save_path = 'C:/Users/bob/Desktop/imu_framework/imu_framework/data/raw'  # '/home/pi/Desktop/imu_framework/imu_framework/data/raw'
-            fileName = fileName + '_raw_data'
-        if testRawFiltered == 'filtered':
-            save_path = 'C:/Users/bob/Desktop/imu_framework/imu_framework/data/filtered'  # '/home/pi/Desktop/imu_framework/imu_framework/data/filtered'
-            fileName = fileName + '_filtered_data'
+    def print2CvFile(self, data, iteration, fileName='youForgotToNameYourFile',
+                     save_path='C:/Users/bob/Desktop/IMU/tests/test_files/data/csv'):
+        # '/home/pi/Desktop/imu_framework//IMU/tests/test_files/data/csv'
 
         nameOfFile = os.path.join(save_path, fileName + ".csv")
 
@@ -105,7 +93,7 @@ class imu_tools():
 def fouriorTransform(self, inputData):
     data = np.array(inputData)
     outputData = np.fft.rfft(data)
-    #outputData = np.fft.fftfreq(inputData)
+    # outputData = np.fft.fftfreq(inputData)
     return outputData
 
 

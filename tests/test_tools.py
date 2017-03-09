@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from imu_framework.imu_tools import imu_tools
 
 
-class testingShit():
+class testing():
     testing = imu_tools(1000)
 
     '''
@@ -17,10 +17,10 @@ class testingShit():
         i+=1
 
 
-    with open('Billy_Phillips_2_15_2017_still_test_data.csv', 'rb') as fuckThis:
-        reader = csv.reader(fuckThis, delimiter=' ', quotechar='|')
+    with open('Billy_Phillips_2_15_2017_still_test_data.csv', 'rb') as this:
+        reader = csv.reader(this, delimiter=' ', quotechar='|')
         for row in reader:
-            listOfShit = list(', '.join(row))
+            list = list(', '.join(row))
 
 
     somthing = 0
@@ -28,10 +28,10 @@ class testingShit():
     with open('Billy_Phillips_2_15_2017_still_test_data.csv') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            listOfshit = (row['X Acc'], row['Y Acc'], row['Z Acc'],
+            list = (row['X Acc'], row['Y Acc'], row['Z Acc'],
                              row['X Gyro'], row['Y Gyro'], row['Z Gyro'],
                              row['X Mag'], row['Y Mag'], row['Z Mag'])
-            print (listOfshit)
+            print (list)
             your_list = map(tuple, reader)
 
     print (your_list)
@@ -46,7 +46,7 @@ class testingShit():
     tupleData = tuple(data)
     '''
 
-    data = testing.csvData2NpArray('Billy_Phillips_2_15_2017ttttt_test_data.csv', 0)
+    data = testing.csvData2NpArray('test_files/data/csv/Billy_Phillips_2_15_2017ttttt_test_data.csv', 0)
     i = 0
     while i <= len(data) - 1:
         testing.fifoMemoryUpdate(data[i])
