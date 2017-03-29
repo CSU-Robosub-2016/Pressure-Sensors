@@ -1,7 +1,6 @@
 import numpy as np
-import sys
-import I2C
-import I2C.pressuretrans
+import RPi.GPIO as GPIO
+import time
 
-i2c = I2C.BusI2C('COM2')
-i2c.bus.setSpeed(2000)  # you can set i2c speed adapted to your hardware
+# Use physical pin numbers
+GPIO.setmode(GPIO.BOARD)
